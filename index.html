@@ -1,0 +1,79 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/pure-min.css"
+          integrity="sha384-CCTZv2q9I9m3UOxRLaJneXrrqKwUNOzZ6NGEUMwHtShDJ+nCoiXJCAgi05KfkLGY" crossorigin="anonymous">
+    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="bower_components/leaflet-search/dist/leaflet-search.min.css">
+    <link rel="stylesheet" href="bower_components/leaflet-routing-machine/dist/leaflet-routing-machine.css">
+
+    <style>
+        #leafMap {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="pure-g">
+    <input type="text" id="searchBox" placeholder="Search...">
+    <button id="deleteMarkers">Delete Markers</button>
+
+    <div class="pure-u-24-24">
+        <div id="leafMap"></div>
+    </div>
+</div>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&sensor=false"></script>
+<script src="bower_components/leaflet/dist/leaflet.js"></script>
+<script src="bower_components/leaflet-search/dist/leaflet-search.min.js"></script>
+<script src="bower_components/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
+<script src="assets/js/leafLetMap.js"></script>
+
+<script>
+    var jQ = jQuery.noConflict();
+    
+    jQ(document).ready(function () {
+        WBLeafMap.init('leafMap');
+        WBLeafMap.addMarker(14.5995, 120.9842, {
+            popup: {
+                content: 'This is a content.'
+            },
+            icon: 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Inside-Chartreuse-icon.png'
+        }, function (e) {
+            console.log(this.getLatLng());
+        });
+
+        // on click map
+        WBLeafMap.onClick(function (e) {
+            WBLeafMap.addMarker(e.latlng.lat, e.latlng.lng, {
+                popup: {
+                    content: 'This is a content.'
+                },
+                icon: 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Inside-Chartreuse-icon.png'
+            }, function (e) {
+                console.log(this.getLatLng());
+            });
+        });
+
+        // delete markers
+        jQ('#deleteMarkers').off().on('click', function (e) {
+            WBLeafMap.deleteMarker();
+        });
+
+        // search
+        WBLeafMap.search('searchBox');
+
+        // routing
+        WBLeafMap.route([
+            L.latLng(14.5547, 121.0244),
+            L.latLng(14.6760, 121.0437)
+        ], function (e) {
+
+        });
+    });
+</script>
+</body>
+</html>

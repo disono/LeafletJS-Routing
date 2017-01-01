@@ -1,0 +1,24 @@
+{
+  "name": "leafletjs_routing",
+  "description": "LeafletJS-Routing",
+  "main": "index.js",
+  "authors": [
+    "Archie Disono"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/disono/LeafletJS-Routing",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "leaflet": "^1.0.2",
+    "pure": "purecss#^0.6.1",
+    "leaflet-search": "^2.7.0",
+    "leaflet-routing-machine": "^3.2.4"
+  }
+}
